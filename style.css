@@ -1,0 +1,529 @@
+/* =========================================================
+   STUDENT MANAGEMENT SYSTEM - STYLESHEET (style.css)
+   =========================================================
+   A clean, beginner-friendly stylesheet demonstrating:
+   1. CSS Custom Properties (Variables)
+   2. Modern Reset & Typography
+   3. Flexbox & CSS Grid Layouts
+   4. Component Design (Cards, Inputs, Buttons, Badges)
+   5. Responsive Media Queries for Mobile & Desktop
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. CSS VARIABLES (DESIGN TOKENS)
+   These let us reuse colors, spacing, and radius easily.
+   --------------------------------------------------------- */
+:root {
+  /* Brand & Status Colors */
+  --primary: #3b82f6;        /* Modern Blue */
+  --primary-hover: #2563eb;
+  --primary-light: #eff6ff;
+  --success: #10b981;        /* Emerald Green */
+  --success-light: #ecfdf5;
+  --warning: #f59e0b;        /* Amber */
+  --warning-light: #fffbeb;
+  --danger: #ef4444;         /* Red */
+  --danger-light: #fef2f2;
+  --purple: #8b5cf6;         /* Purple */
+  --purple-light: #f5f3ff;
+
+  /* Neutral Surface & Text Colors */
+  --bg-body: #f8fafc;        /* Soft cool grey background */
+  --bg-card: #ffffff;        /* Pure white for cards */
+  --text-main: #1e293b;      /* Dark slate for readable text */
+  --text-muted: #64748b;     /* Secondary / placeholder text */
+  --border-color: #e2e8f0;   /* Subtle divider border */
+
+  /* UI Accents */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --transition: all 0.2s ease-in-out;
+}
+
+/* ---------------------------------------------------------
+   2. GLOBAL RESET & BASE STYLES
+   --------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Includes padding & border in total width/height */
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* Reusable Container to center and constrain page width */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------------------------------------------------------
+   3. HEADER STYLES
+   --------------------------------------------------------- */
+.app-header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  padding: 20px 0;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.brand h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------------------------------------------------------
+   4. DASHBOARD STAT CARDS (GRID)
+   --------------------------------------------------------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.bg-blue   { background-color: var(--primary-light); color: var(--primary); }
+.bg-green  { background-color: var(--success-light); color: var(--success); }
+.bg-purple { background-color: var(--purple-light); color: var(--purple); }
+
+.stat-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.stat-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------
+   5. TWO-COLUMN WORKSPACE LAYOUT
+   --------------------------------------------------------- */
+.layout-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* General Card Container */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.form-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ---------------------------------------------------------
+   6. FORM CONTROLS & INPUTS
+   --------------------------------------------------------- */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.required {
+  color: var(--danger);
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Error message styling */
+.error-text {
+  color: var(--danger);
+  font-size: 0.775rem;
+  margin-top: 4px;
+  display: block;
+  min-height: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* ---------------------------------------------------------
+   7. BUTTONS
+   --------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+.btn-secondary:hover {
+  background-color: #dbeafe;
+}
+
+.btn-outline-danger {
+  background: transparent;
+  color: var(--danger);
+  border-color: #fecaca;
+}
+.btn-outline-danger:hover {
+  background-color: var(--danger-light);
+}
+
+.btn-ghost {
+  background-color: #f1f5f9;
+  color: var(--text-muted);
+}
+.btn-ghost:hover {
+  background-color: #e2e8f0;
+  color: var(--text-main);
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------
+   8. TABLE CONTROLS (SEARCH & FILTER)
+   --------------------------------------------------------- */
+.table-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.search-box input {
+  padding-left: 36px;
+}
+
+.filter-box {
+  min-width: 180px;
+}
+
+/* ---------------------------------------------------------
+   9. STUDENT DATA TABLE
+   --------------------------------------------------------- */
+.table-responsive {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.student-table th {
+  background-color: #f8fafc;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.775rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.student-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.student-table tbody tr {
+  transition: var(--transition);
+}
+
+.student-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Student detail in cell */
+.student-name-text {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.student-email-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.student-id-badge {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #475569;
+  background-color: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Academic Grade Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  text-align: center;
+}
+
+.badge-grade-a { background-color: #dcfce7; color: #15803d; }
+.badge-grade-b { background-color: #dbeafe; color: #1d4ed8; }
+.badge-grade-c { background-color: #fef9c3; color: #a16207; }
+.badge-grade-d { background-color: #ffedd5; color: #c2410c; }
+.badge-grade-f { background-color: #fee2e2; color: #b91c1c; }
+
+/* Table Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ---------------------------------------------------------
+   10. EMPTY STATE VIEW
+   --------------------------------------------------------- */
+.empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  font-size: 1.15rem;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.empty-state p {
+  font-size: 0.875rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------
+   11. TOAST NOTIFICATION
+   --------------------------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 1000;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(0);
+}
+
+/* Helper hidden class */
+.hidden {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------
+   12. RESPONSIVE MEDIA QUERIES
+   --------------------------------------------------------- */
+@media (max-width: 900px) {
+  .layout-grid {
+    grid-template-columns: 1fr; /* Switch to single column on tablet/mobile */
+  }
+
+  .table-controls {
+    flex-direction: column;
+  }
+
+  .filter-box {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
